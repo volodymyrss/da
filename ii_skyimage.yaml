@@ -1,0 +1,61 @@
+context:
+  _: https://odahub.io/ontology/workflows/ddosa
+  oda: https://odahub.io/ontology/workflows/ddosa
+
+---
+
+emerge:
+  target: ii_skyimage
+  modules:
+  - ddosa 
+  assume:
+  - ScWData:
+      scwid: 066500110010
+
+---
+
+# open graph: some nodes are not computable
+
+ii_skyimage:
+  binned_events: BinEventsImage
+  cat: CatExtract
+
+---
+
+CatExtract:
+  scw: ScWData
+  refcat: ISDCRefCat
+
+ISDCRefCat:
+  version: 43
+
+ScWData:
+  scwid: 066500110010
+
+ISDCRefCat:
+  callable: DDAClass 
+  location: git://..../...ddosa.py::ISDCRefCat # py will be cached
+
+---
+
+# shortened representation
+
+CatExtract:
+  ScWData:
+    066500110010
+  ISDCRefCat:
+    43
+
+---
+
+
+mosaic:
+  image_list: images
+
+images:
+  scwlist: ReVScWList
+  scw_to_image: ii_skyimage
+
+---
+
+code: ii_skyimage
